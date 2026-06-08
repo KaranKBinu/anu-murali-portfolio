@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Anu Murali — Portfolio Website
 
-## Getting Started
+A professional, animated portfolio website for **Anu Murali** — Data Science & AI/ML Engineer.
 
-First, run the development server:
+🌐 **Live:** [View on Vercel](#) *(update after deployment)*
+
+---
+
+## ✨ Features
+
+- **Three.js** neural network background with 180 animated particles
+- **3D rotating data globe** in the About section
+- **Framer Motion** scroll-triggered animations throughout
+- **Glassmorphism** design with dark navy/cyan/violet palette
+- **Tabbed skills** section with animated progress bars
+- **3D tilt** effect on project cards
+- Fully **responsive** for all screen sizes
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| Next.js 14 | React framework (App Router) |
+| Three.js + @react-three/fiber | 3D scenes and animations |
+| @react-three/drei | Three.js helpers |
+| Framer Motion | Scroll & UI animations |
+| Lucide React | Icons |
+| CSS Modules | Scoped styling |
+
+## 🚀 Getting Started
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/
+│   ├── globals.css       # Design system (tokens, glassmorphism)
+│   ├── layout.tsx        # Root layout + SEO metadata
+│   └── page.tsx          # Main single-page entry
+└── components/
+    ├── ThreeBackground   # Neural network Three.js canvas
+    ├── Navbar            # Sticky glassmorphism nav
+    ├── HeroSection       # Full-screen hero with animations
+    ├── AboutSection      # 3D globe + bio + traits
+    ├── EducationSection  # Animated timeline
+    ├── SkillsSection     # Tabbed skills + progress bars
+    ├── ProjectsSection   # Tilt glass project cards
+    └── ContactSection    # Contact form + socials
+```
 
-## Learn More
+## 🌐 Deploying to Vercel
 
-To learn more about Next.js, take a look at the following resources:
+This project is pre-configured for Vercel via `vercel.json`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Via Vercel Dashboard (recommended):**
+1. Push this repo to GitHub
+2. Go to [vercel.com](https://vercel.com) → New Project
+3. Import the GitHub repo
+4. Click Deploy — Vercel auto-detects Next.js
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Via Vercel CLI:**
+```bash
+npm i -g vercel
+vercel
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built with ❤️ by Anu Murali
