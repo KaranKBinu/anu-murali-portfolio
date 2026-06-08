@@ -1,24 +1,15 @@
 import type { Metadata } from "next";
+import portfolioData from "@/data/portfolio.json";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Anu Murali | Data Science & AI/ML Portfolio",
-  description:
-    "Portfolio of Anu Murali — Creative Data Science & AI/ML engineer specializing in Power BI, data transformation, and machine learning. Computer Engineering Diploma graduate.",
-  keywords: [
-    "Anu Murali",
-    "Data Science",
-    "AI",
-    "Machine Learning",
-    "Power BI",
-    "Data Transformation",
-    "Portfolio",
-  ],
-  authors: [{ name: "Anu Murali" }],
+  title: portfolioData.metadata.title,
+  description: portfolioData.metadata.description,
+  keywords: portfolioData.metadata.keywords,
+  authors: [{ name: portfolioData.personalInfo.name }],
   openGraph: {
-    title: "Anu Murali | Data Science & AI/ML Portfolio",
-    description:
-      "Creative Data Science & AI/ML engineer with expertise in Power BI and data transformation.",
+    title: portfolioData.metadata.title,
+    description: portfolioData.metadata.description,
     type: "website",
   },
 };

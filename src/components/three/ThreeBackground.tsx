@@ -10,14 +10,14 @@ function NeuralParticles() {
   const linesRef = useRef<THREE.LineSegments>(null!);
 
   const { positions, linePositions } = useMemo(() => {
-    const count = 180;
+    const count = 220;
     const positions = new Float32Array(count * 3);
     const nodes: [number, number, number][] = [];
 
     for (let i = 0; i < count; i++) {
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
-      const r = 2.5 + Math.random() * 1.5;
+      const r = 2.5 + Math.random() * 2.0;
       const x = r * Math.sin(phi) * Math.cos(theta);
       const y = r * Math.sin(phi) * Math.sin(theta);
       const z = r * Math.cos(phi);
@@ -28,7 +28,7 @@ function NeuralParticles() {
     }
 
     const lineVerts: number[] = [];
-    const threshold = 1.6;
+    const threshold = 1.8;
     for (let i = 0; i < nodes.length; i++) {
       for (let j = i + 1; j < nodes.length; j++) {
         const dx = nodes[i][0] - nodes[j][0];
@@ -55,63 +55,58 @@ function NeuralParticles() {
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
+    const { x, y } = state.pointer;
+    const scrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+    
+    const scrollRotate = scrollY * 0.0003;
+    const targetRotX = t * 0.03 + y * 0.12;
+    const targetRotY = t * 0.04 + x * 0.12 + scrollRotate;
+
     if (ref.current) {
-      ref.current.rotation.x = t * 0.04;
-      ref.current.rotation.y = t * 0.06;
+      ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, targetRotX, 0.05);
+      ref.current.rotation.y = THREE.MathUtils.lerp(ref.current.rotation.y, targetRotY, 0.05);
     }
     if (linesRef.current) {
-      linesRef.current.rotation.x = t * 0.04;
-      linesRef.current.rotation.y = t * 0.06;
+      linesRef.current.rotation.x = THREE.MathUtils.lerp(linesRef.current.rotation.x, targetRotX, 0.05);
+      linesRef.current.rotation.y = THREE.MathUtils.lerp(linesRef.current.rotation.y, targetRotY, 0.05);
     }
   });
 
   return (
     <>
       <lineSegments ref={linesRef} geometry={lineGeo}>
-        <lineBasicMaterial color="#00d4ff" transparent opacity={0.08} />
+        <lineBasicMaterial color="#00d4ff" transparent opacity={0.06} />
       </lineSegments>
       <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
         <PointMaterial
           transparent
           color="#00d4ff"
-          size={0.04}
+          size={0.035}
           sizeAttenuation
           depthWrite={false}
-          opacity={0.7}
+          opacity={0.6}
         />
       </Points>
     </>
   );
 }
 
-function FloatingOrb({ position, color, scale }: { position: [number, number, number]; color: string; scale: number }) {
-  const ref = useRef<THREE.Mesh>(null!);
-  const speed = useMemo(() => 0.3 + Math.random() * 0.5, []);
-  const offset = useMemo(() => Math.random() * Math.PI * 2, []);
-
+function CameraRig() {
   useFrame((state) => {
-    const t = state.clock.getElapsedTime();
-    if (ref.current) {
-      ref.current.position.y = position[1] + Math.sin(t * speed + offset) * 0.3;
-      ref.current.rotation.x = t * 0.2;
-      ref.current.rotation.z = t * 0.15;
-    }
+    const { x, y } = state.pointer;
+    const scrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+    
+    const targetX = x * 1.5;
+    const targetY = y * 1.5 - (scrollY * 0.001);
+    
+    state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, targetX, 0.05);
+    state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, targetY, 0.05);
+    state.camera.lookAt(0, -scrollY * 0.0005, 0);
   });
-
-  return (
-    <mesh ref={ref} position={position} scale={scale}>
-      <icosahedronGeometry args={[1, 1]} />
-      <meshStandardMaterial
-        color={color}
-        wireframe
-        transparent
-        opacity={0.25}
-      />
-    </mesh>
-  );
+  return null;
 }
 
-export default function ThreeBackground() {
+export function ThreeBackground() {
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
       <Canvas
@@ -119,15 +114,11 @@ export default function ThreeBackground() {
         style={{ background: 'transparent' }}
         dpr={[1, 1.5]}
       >
-        <ambientLight intensity={0.5} />
-        <pointLight position={[5, 5, 5]} color="#00d4ff" intensity={1} />
-        <pointLight position={[-5, -5, -5]} color="#7c3aed" intensity={0.8} />
+        <CameraRig />
         <NeuralParticles />
-        <FloatingOrb position={[-3, 1.5, -2]} color="#00d4ff" scale={0.6} />
-        <FloatingOrb position={[3, -1, -3]} color="#7c3aed" scale={0.8} />
-        <FloatingOrb position={[1, 2.5, -4]} color="#f59e0b" scale={0.5} />
-        <FloatingOrb position={[-2, -2, -2]} color="#f43f5e" scale={0.4} />
       </Canvas>
     </div>
   );
 }
+
+export default ThreeBackground;

@@ -1,0 +1,243 @@
+{
+  "personalInfo": {
+    "name": "Anu Murali",
+    "avatarInitials": "AM",
+    "hireMeHref": "#contact"
+  },
+  "metadata": {
+    "title": "Anu Murali | Data Science & AI/ML Portfolio",
+    "description": "Portfolio of Anu Murali — Creative Data Science & AI/ML engineer specializing in Power BI, data transformation, and machine learning. Computer Engineering Diploma graduate.",
+    "keywords": [
+      "Anu Murali",
+      "Data Science",
+      "AI",
+      "Machine Learning",
+      "Power BI",
+      "Data Transformation",
+      "Portfolio"
+    ]
+  },
+  "navigation": {
+    "navLinks": [
+      { "label": "Home", "href": "#hero" },
+      { "label": "About", "href": "#about" },
+      { "label": "Education", "href": "#education" },
+      { "label": "Skills", "href": "#skills" },
+      { "label": "Projects", "href": "#projects" },
+      { "label": "Contact", "href": "#contact" }
+    ]
+  },
+  "hero": {
+    "badgeText": "Open to Opportunities",
+    "name": "Anu Murali",
+    "description": "A creative and insightful Data Science & AI/ML engineer who transforms raw data into compelling narratives and actionable intelligence. Passionate about building intelligent systems that make a real-world impact.",
+    "roles": [
+      "Data Scientist",
+      "AI/ML Engineer",
+      "Power BI Expert",
+      "Data Visionary"
+    ],
+    "stats": [
+      { "num": "5+", "label": "Projects Built" },
+      { "num": "3+", "label": "Tools Mastered" },
+      { "num": "2", "label": "Certifications" }
+    ]
+  },
+  "about": {
+    "sectionLabel": "About Me",
+    "titleFirst": "Turning Data Into",
+    "titleHighlight": "Insight",
+    "bioParagraphs": [
+      "I'm Anu Murali — a passionate Data Science and AI/ML practitioner with a Computer Engineering diploma background. I specialize in transforming raw, complex datasets into meaningful visual stories and intelligent models that drive real decisions.",
+      "My approach combines deep technical knowledge with creative intuition — I don't just analyze data, I understand the story it's trying to tell. Whether it's Power BI dashboards, machine learning models, or data transformation pipelines, I bring both rigor and artistry to every project."
+    ],
+    "chips": ["Power BI", "Machine Learning", "Data Science", "AI/ML"],
+    "traits": [
+      {
+        "icon": "Brain",
+        "title": "Creative Thinker",
+        "description": "Brings unique, imaginative perspectives to complex data challenges — turning abstract patterns into elegant solutions.",
+        "color": "var(--accent-cyan)"
+      },
+      {
+        "icon": "Search",
+        "title": "Deep Researcher",
+        "description": "Dives deep into datasets and literature, uncovering hidden insights that others miss through meticulous analysis.",
+        "color": "var(--accent-violet)"
+      },
+      {
+        "icon": "Lightbulb",
+        "title": "Sharp Insight",
+        "description": "Translates dense data into clear, actionable intelligence — communicating complex findings with precision and clarity.",
+        "color": "var(--accent-gold)"
+      }
+    ]
+  },
+  "education": {
+    "timeline": [
+      {
+        "id": 1,
+        "icon": "GraduationCap",
+        "period": "2021 – 2024",
+        "degree": "Diploma in Computer Engineering",
+        "institution": "Government Polytechnic",
+        "description": "Built a strong foundation in computer science fundamentals — programming, system design, networking, and software development principles. Graduated with distinction.",
+        "tags": ["Programming", "System Design", "Networking", "Algorithms"],
+        "color": "var(--accent-cyan)",
+        "side": "left"
+      },
+      {
+        "id": 2,
+        "icon": "BookOpen",
+        "period": "2023 – 2024",
+        "degree": "Data Science with AI & ML",
+        "institution": "Advanced Learning Program",
+        "description": "Deep-dived into the world of artificial intelligence and machine learning. Mastered data pipelines, model training, evaluation, and deploying ML solutions at scale.",
+        "tags": ["Python", "Machine Learning", "Deep Learning", "Data Analysis"],
+        "color": "var(--accent-violet)",
+        "side": "right"
+      },
+      {
+        "id": 3,
+        "icon": "Award",
+        "period": "2024",
+        "degree": "Power BI & Data Transformation",
+        "institution": "Microsoft Certified Training",
+        "description": "Specialized in business intelligence tooling, data modeling, DAX, and building executive-level dashboards that transform raw data into decision-enabling visuals.",
+        "tags": ["Power BI", "DAX", "Data Modeling", "ETL"],
+        "color": "var(--accent-gold)",
+        "side": "left"
+      }
+    ]
+  },
+  "skills": {
+    "categories": [
+      {
+        "id": "bi",
+        "label": "Business Intelligence",
+        "color": "var(--accent-cyan)",
+        "skills": [
+          { "name": "Power BI", "level": 90, "desc": "Interactive dashboards, DAX, data modeling" },
+          { "name": "Data Visualization", "level": 85, "desc": "Charts, reports, executive dashboards" },
+          { "name": "DAX / M Language", "level": 80, "desc": "Advanced formulas and queries" },
+          { "name": "Excel Analytics", "level": 88, "desc": "Pivot tables, Power Query, VBA" }
+        ]
+      },
+      {
+        "id": "ds",
+        "label": "Data Science",
+        "color": "var(--accent-violet)",
+        "skills": [
+          { "name": "Python", "level": 85, "desc": "Pandas, NumPy, Scikit-learn, Matplotlib" },
+          { "name": "Data Transformation", "level": 90, "desc": "ETL pipelines, data cleaning, feature engineering" },
+          { "name": "Statistical Analysis", "level": 78, "desc": "Hypothesis testing, regression, EDA" },
+          { "name": "SQL", "level": 82, "desc": "Queries, joins, optimization, reporting" }
+        ]
+      },
+      {
+        "id": "aiml",
+        "label": "AI & Machine Learning",
+        "color": "var(--accent-gold)",
+        "skills": [
+          { "name": "Machine Learning", "level": 82, "desc": "Supervised, unsupervised, model evaluation" },
+          { "name": "Deep Learning", "level": 72, "desc": "Neural networks, CNNs, TensorFlow/Keras" },
+          { "name": "NLP Basics", "level": 68, "desc": "Text processing, sentiment analysis" },
+          { "name": "Model Deployment", "level": 70, "desc": "Flask APIs, model serving" }
+        ]
+      }
+    ],
+    "toolsBadges": [
+      "Jupyter Notebook",
+      "Google Colab",
+      "Git & GitHub",
+      "Tableau",
+      "MySQL",
+      "Power Query",
+      "Seaborn",
+      "Matplotlib"
+    ]
+  },
+  "projects": [
+    {
+      "id": 1,
+      "icon": "BarChart3",
+      "title": "Sales Intelligence Dashboard",
+      "subtitle": "Power BI · Data Analytics",
+      "description": "A comprehensive Power BI dashboard tracking sales KPIs, regional performance, and product trends across 12 months of historical data. Features drill-through reports and automated alerts.",
+      "tags": ["Power BI", "DAX", "Data Modeling", "ETL"],
+      "color": "var(--accent-cyan)",
+      "gradient": "linear-gradient(135deg, color-mix(in srgb, var(--accent-cyan) 20%, transparent), color-mix(in srgb, var(--accent-violet) 10%, transparent))",
+      "github": "#",
+      "live": "#"
+    },
+    {
+      "id": 2,
+      "icon": "UserMinus",
+      "title": "Customer Churn Predictor",
+      "subtitle": "Machine Learning · Python",
+      "description": "ML model achieving 89% accuracy predicting customer churn using ensemble methods. Built end-to-end pipeline from data cleaning to model deployment as a REST API with Flask.",
+      "tags": ["Python", "Scikit-learn", "Flask", "Pandas"],
+      "color": "var(--accent-violet)",
+      "gradient": "linear-gradient(135deg, color-mix(in srgb, var(--accent-violet) 20%, transparent), color-mix(in srgb, var(--accent-rose) 10%, transparent))",
+      "github": "#",
+      "live": "#"
+    },
+    {
+      "id": 3,
+      "icon": "Database",
+      "title": "Data Transformation Engine",
+      "subtitle": "ETL · Data Engineering",
+      "description": "Automated ETL pipeline processing 500K+ daily records — cleaning, validating, and transforming data from multiple sources into a unified analytical schema with error logging.",
+      "tags": ["Python", "SQL", "Power Query", "Data Cleaning"],
+      "color": "var(--accent-gold)",
+      "gradient": "linear-gradient(135deg, color-mix(in srgb, var(--accent-gold) 20%, transparent), color-mix(in srgb, var(--accent-cyan) 10%, transparent))",
+      "github": "#",
+      "live": "#"
+    },
+    {
+      "id": 4,
+      "icon": "LineChart",
+      "title": "Market Trend Analyzer",
+      "subtitle": "Data Science · NLP",
+      "description": "Sentiment analysis and trend detection system for financial news. Correlates news sentiment scores with stock movement patterns using NLP and time-series analysis.",
+      "tags": ["NLP", "Time-Series", "Python", "Matplotlib"],
+      "color": "var(--accent-rose)",
+      "gradient": "linear-gradient(135deg, color-mix(in srgb, var(--accent-rose) 20%, transparent), color-mix(in srgb, var(--accent-violet) 10%, transparent))",
+      "github": "#",
+      "live": "#"
+    }
+  ],
+  "contact": {
+    "sectionLabel": "Contact",
+    "titleFirst": "Let's",
+    "titleHighlight": "Connect",
+    "subheading": "Open to opportunities, collaborations, and interesting conversations.",
+    "infoTitle": "Get In Touch",
+    "infoText": "Whether you have a project in mind, need a data analyst, or just want to chat about AI and data — my inbox is always open.",
+    "location": "India",
+    "phoneInfo": "Available for Remote & On-site",
+    "socials": [
+      {
+        "icon": "GitBranch",
+        "label": "GitHub",
+        "value": "github.com/anumurali",
+        "href": "#",
+        "color": "var(--brand-github)"
+      },
+      {
+        "icon": "Link",
+        "label": "LinkedIn",
+        "value": "linkedin.com/in/anumurali",
+        "href": "#",
+        "color": "var(--brand-linkedin)"
+      },
+      {
+        "icon": "Mail",
+        "label": "Email",
+        "value": "anu.murali@email.com",
+        "href": "mailto:anu.murali@email.com",
+        "color": "var(--accent-cyan)"
+      }
+    ]
+  }
+}

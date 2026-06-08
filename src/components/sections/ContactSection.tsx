@@ -2,34 +2,23 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Send, MapPin, Phone, CheckCircle, GitBranch, Link } from 'lucide-react';
+import { Send, MapPin, Phone, CheckCircle } from 'lucide-react';
+import {
+  SOCIALS,
+  CONTACT_SECTION_LABEL,
+  CONTACT_TITLE_FIRST,
+  CONTACT_TITLE_HIGHLIGHT,
+  CONTACT_SUBHEADING,
+  CONTACT_INFO_TITLE,
+  CONTACT_INFO_TEXT,
+  CONTACT_LOCATION,
+  CONTACT_PHONE_INFO,
+  PORTFOLIO_NAME
+} from '@/constants';
+import { SectionHeader } from '@/components/ui';
 import styles from './ContactSection.module.css';
 
-const socials = [
-  {
-    icon: GitBranch,
-    label: 'GitHub',
-    value: 'github.com/anumurali',
-    href: '#',
-    color: '#f0f4ff',
-  },
-  {
-    icon: Link,
-    label: 'LinkedIn',
-    value: 'linkedin.com/in/anumurali',
-    href: '#',
-    color: '#0A66C2',
-  },
-  {
-    icon: Mail,
-    label: 'Email',
-    value: 'anu.murali@email.com',
-    href: 'mailto:anu.murali@email.com',
-    color: '#00d4ff',
-  },
-];
-
-export default function ContactSection() {
+export function ContactSection() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -50,22 +39,13 @@ export default function ContactSection() {
     <section id="contact" className="section">
       <div className="section-inner">
         {/* Header */}
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="section-label">Contact</span>
-          <h2>
-            Let&apos;s <span className="gradient-text">Connect</span>
-          </h2>
-          <div className="section-divider" />
-          <p className={styles.subheading}>
-            Open to opportunities, collaborations, and interesting conversations.
-          </p>
-        </motion.div>
+        <SectionHeader
+          label={CONTACT_SECTION_LABEL}
+          titleFirst={CONTACT_TITLE_FIRST}
+          titleHighlight={CONTACT_TITLE_HIGHLIGHT}
+          subheading={CONTACT_SUBHEADING}
+          subheadingClassName={styles.subheading}
+        />
 
         <div className={styles.grid}>
           {/* Left: Info */}
@@ -77,20 +57,19 @@ export default function ContactSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <div className={`glass-card ${styles.infoCard}`}>
-              <h3 className={styles.infoTitle}>Get In Touch</h3>
+              <h3 className={styles.infoTitle}>{CONTACT_INFO_TITLE}</h3>
               <p className={styles.infoText}>
-                Whether you have a project in mind, need a data analyst, or just want to chat about
-                AI and data — my inbox is always open.
+                {CONTACT_INFO_TEXT}
               </p>
 
               <div className={styles.details}>
                 <div className={styles.detail}>
                   <MapPin size={16} color="#00d4ff" />
-                  <span>India</span>
+                  <span>{CONTACT_LOCATION}</span>
                 </div>
                 <div className={styles.detail}>
                   <Phone size={16} color="#7c3aed" />
-                  <span>Available for Remote & On-site</span>
+                  <span>{CONTACT_PHONE_INFO}</span>
                 </div>
               </div>
 
@@ -98,7 +77,7 @@ export default function ContactSection() {
 
               {/* Social links */}
               <div className={styles.socials}>
-                {socials.map((s) => (
+                {SOCIALS.map((s) => (
                   <a
                     key={s.label}
                     href={s.href}
@@ -109,7 +88,7 @@ export default function ContactSection() {
                   >
                     <div
                       className={styles.socialIcon}
-                      style={{ background: `${s.color}15`, border: `1px solid ${s.color}30` }}
+                      style={{ background: `color-mix(in srgb, ${s.color} 8%, transparent)`, border: `1px solid color-mix(in srgb, ${s.color} 18%, transparent)` }}
                     >
                       <s.icon size={18} color={s.color} />
                     </div>
@@ -233,9 +212,11 @@ export default function ContactSection() {
       {/* Footer */}
       <div className={styles.footer}>
         <p>
-          Crafted with passion by <span className="gradient-text">Anu Murali</span> · {new Date().getFullYear()}
+          Crafted with passion by <span className="gradient-text">{PORTFOLIO_NAME}</span> · {new Date().getFullYear()}
         </p>
       </div>
     </section>
   );
 }
+
+export default ContactSection;

@@ -5,15 +5,18 @@ import { motion } from 'framer-motion';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Sphere } from '@react-three/drei';
 import * as THREE from 'three';
-import { Brain, Lightbulb, Search } from 'lucide-react';
+import { PERSONALITY_TRAITS, ABOUT_CHIPS, ABOUT_TITLE_FIRST, ABOUT_TITLE_HIGHLIGHT, ABOUT_BIO_PARAGRAPHS } from '@/constants';
 import styles from './AboutSection.module.css';
 
 function DataGlobe() {
   const groupRef = useRef<THREE.Group>(null!);
   const dotsRef = useRef<THREE.Points>(null!);
+  const coreRef = useRef<THREE.Mesh>(null!);
+  const ring1Ref = useRef<THREE.Mesh>(null!);
+  const ring2Ref = useRef<THREE.Mesh>(null!);
 
   const { positions } = useMemo(() => {
-    const count = 300;
+    const count = 350;
     const positions = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       const phi = Math.acos(-1 + (2 * i) / count);
@@ -27,15 +30,30 @@ function DataGlobe() {
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
+    const { x, y } = state.pointer;
+
     if (groupRef.current) {
-      groupRef.current.rotation.y = t * 0.3;
-      groupRef.current.rotation.x = Math.sin(t * 0.1) * 0.15;
+      groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, t * 0.2 + x * 0.8, 0.05);
+      groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, Math.sin(t * 0.1) * 0.1 + y * 0.8, 0.05);
+    }
+
+    if (coreRef.current) {
+      const coreMat = coreRef.current.material as THREE.MeshStandardMaterial;
+      coreMat.emissiveIntensity = 1.0 + Math.sin(t * 3) * 0.5;
+      const coreScale = 1.0 + Math.sin(t * 3) * 0.08;
+      coreRef.current.scale.set(coreScale, coreScale, coreScale);
+    }
+
+    if (ring1Ref.current) {
+      ring1Ref.current.rotation.z = t * 0.4;
+    }
+    if (ring2Ref.current) {
+      ring2Ref.current.rotation.z = -t * 0.6;
     }
   });
 
   return (
     <group ref={groupRef}>
-      {/* Globe wireframe */}
       <Sphere args={[1.5, 24, 24]}>
         <meshStandardMaterial
           color="#00d4ff"
@@ -45,7 +63,6 @@ function DataGlobe() {
         />
       </Sphere>
 
-      {/* Dots on sphere */}
       <points ref={dotsRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -62,53 +79,41 @@ function DataGlobe() {
         />
       </points>
 
-      {/* Glowing center */}
-      <mesh>
+      <mesh ref={coreRef}>
         <sphereGeometry args={[0.25, 16, 16]} />
         <meshStandardMaterial
           color="#7c3aed"
           emissive="#7c3aed"
           emissiveIntensity={1.5}
           transparent
-          opacity={0.9}
+          opacity={0.95}
         />
       </mesh>
 
-      {/* Ring */}
-      <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[1.7, 0.015, 8, 80]} />
+      <mesh ref={ring1Ref} rotation={[Math.PI / 2.5, Math.PI / 8, 0]}>
+        <torusGeometry args={[1.75, 0.012, 8, 80]} />
         <meshStandardMaterial
           color="#f59e0b"
           emissive="#f59e0b"
-          emissiveIntensity={1}
+          emissiveIntensity={0.8}
           transparent
-          opacity={0.6}
+          opacity={0.5}
+        />
+      </mesh>
+
+      <mesh ref={ring2Ref} rotation={[Math.PI / 1.7, -Math.PI / 6, 0]}>
+        <torusGeometry args={[1.9, 0.008, 8, 80]} />
+        <meshStandardMaterial
+          color="#00d4ff"
+          emissive="#00d4ff"
+          emissiveIntensity={1.2}
+          transparent
+          opacity={0.4}
         />
       </mesh>
     </group>
   );
 }
-
-const traits = [
-  {
-    icon: Brain,
-    title: 'Creative Thinker',
-    description: 'Brings unique, imaginative perspectives to complex data challenges — turning abstract patterns into elegant solutions.',
-    color: '#00d4ff',
-  },
-  {
-    icon: Search,
-    title: 'Deep Researcher',
-    description: 'Dives deep into datasets and literature, uncovering hidden insights that others miss through meticulous analysis.',
-    color: '#7c3aed',
-  },
-  {
-    icon: Lightbulb,
-    title: 'Sharp Insight',
-    description: 'Translates dense data into clear, actionable intelligence — communicating complex findings with precision and clarity.',
-    color: '#f59e0b',
-  },
-];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -119,11 +124,11 @@ const fadeUp = {
   }),
 };
 
-export default function AboutSection() {
+export function AboutSection() {
   return (
     <section id="about" className="section">
       <div className="section-inner">
-        <div className={styles.grid}>
+        <div className={gridClass(styles.grid)}>
           {/* Left: Text */}
           <div className={styles.textCol}>
             <motion.span
@@ -142,38 +147,26 @@ export default function AboutSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              Turning Data Into{' '}
-              <span className="gradient-text">Insight</span>
+              {ABOUT_TITLE_FIRST}{' '}
+              <span className="gradient-text">{ABOUT_TITLE_HIGHLIGHT}</span>
             </motion.h2>
 
-            <motion.p
-              className={styles.bio}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              I&apos;m Anu Murali — a passionate Data Science and AI/ML practitioner with a Computer
-              Engineering diploma background. I specialize in transforming raw, complex datasets into
-              meaningful visual stories and intelligent models that drive real decisions.
-            </motion.p>
-
-            <motion.p
-              className={styles.bio}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              My approach combines deep technical knowledge with creative intuition — I don&apos;t just
-              analyze data, I understand the story it&apos;s trying to tell. Whether it&apos;s Power BI
-              dashboards, machine learning models, or data transformation pipelines, I bring both
-              rigor and artistry to every project.
-            </motion.p>
+            {ABOUT_BIO_PARAGRAPHS.map((p, i) => (
+              <motion.p
+                key={i}
+                className={styles.bio}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
+              >
+                {p}
+              </motion.p>
+            ))}
 
             {/* Traits */}
             <div className={styles.traits}>
-              {traits.map((trait, i) => (
+              {PERSONALITY_TRAITS.map((trait, i) => (
                 <motion.div
                   key={trait.title}
                   className={`glass-card ${styles.traitCard}`}
@@ -187,8 +180,8 @@ export default function AboutSection() {
                   <div
                     className={styles.traitIcon}
                     style={{
-                      background: `linear-gradient(135deg, ${trait.color}22, ${trait.color}11)`,
-                      border: `1px solid ${trait.color}33`,
+                      background: `linear-gradient(135deg, color-mix(in srgb, ${trait.color} 13%, transparent), color-mix(in srgb, ${trait.color} 7%, transparent))`,
+                      border: `1px solid color-mix(in srgb, ${trait.color} 20%, transparent)`,
                     }}
                   >
                     <trait.icon size={20} color={trait.color} />
@@ -228,7 +221,7 @@ export default function AboutSection() {
 
             {/* Floating chips */}
             <div className={styles.chips}>
-              {['Power BI', 'Machine Learning', 'Data Science', 'AI/ML'].map((chip, i) => (
+              {ABOUT_CHIPS.map((chip, i) => (
                 <motion.span
                   key={chip}
                   className={styles.chip}
@@ -247,3 +240,10 @@ export default function AboutSection() {
     </section>
   );
 }
+
+// Utility to handle string classes cleanly
+function gridClass(cls: string) {
+  return cls || '';
+}
+
+export default AboutSection;
